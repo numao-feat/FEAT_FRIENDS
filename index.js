@@ -1,122 +1,91 @@
+/**
+ * FEAT FRIENDS クリエイターLP 
+ * インタラクティブ制御スクリプト
+ */
+
 document.addEventListener('DOMContentLoaded', () => {
-
-  /* ==========================================================================
-     1. Mobile Sticky CTA Bar Scroll Controller
-     ========================================================================== */
-  const stickyCtaBar = document.getElementById('stickyCtaBar');
-  const heroSection = document.getElementById('hero');
-  const applySection = document.getElementById('apply');
-  
-  function toggleStickyCta() {
-    if (!stickyCtaBar || !heroSection || !applySection) return;
-
-    const heroHeight = heroSection.offsetHeight;
-    const scrollPosition = window.scrollY;
-    
-    // Check if the actual form is visible in the viewport
-    const applyRect = applySection.getBoundingClientRect();
-    const isFormVisible = applyRect.top < (window.innerHeight - 80);
-    
-    // Show sticky CTA if user scrolled past hero, but hide it once the form itself comes into view
-    if (scrollPosition > (heroHeight - 100) && !isFormVisible) {
-      stickyCtaBar.classList.add('visible');
-    } else {
-      stickyCtaBar.classList.remove('visible');
-    }
-  }
-
-  // Scroll listener with tick throttle
-  let isScrolling = false;
-  window.addEventListener('scroll', () => {
-    if (!isScrolling) {
-      window.requestAnimationFrame(() => {
-        toggleStickyCta();
-        isScrolling = false;
-      });
-      isScrolling = true;
-    }
-  });
-
-  // Run on load
-  toggleStickyCta();
-
-
-  /* ==========================================================================
-     2. Smooth Scroll for internal anchor links (with mobile header offset)
-     ========================================================================== */
-  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function(e) {
-      e.preventDefault();
-      const targetId = this.getAttribute('href');
-      if (targetId === '#') return;
-      
-      const targetElement = document.querySelector(targetId);
-      if (targetElement) {
-        const headerOffset = 70; // Matches header height in index.css
-        const elementPosition = targetElement.getBoundingClientRect().top;
-        const offsetPosition = elementPosition + window.scrollY - headerOffset;
-
-        window.scrollTo({
-          top: offsetPosition,
-          behavior: 'smooth'
-        });
-      }
-    });
-  });
-
-
-  /* ==========================================================================
-     3. Entry Form submission simulation (Mobile Optimization)
-     ========================================================================== */
-  const entryForm = document.getElementById('entryForm');
-  const formSuccess = document.getElementById('formSuccess');
-
-  if (entryForm) {
-    entryForm.addEventListener('submit', (e) => {
-      e.preventDefault();
-
-      // Basic input validation
-      const name = document.getElementById('entryName').value.trim();
-      const email = document.getElementById('entryEmail').value.trim();
-      const role = document.getElementById('entryRole').value;
-
-      if (!name || !email || !role) {
-        alert('すべての必須項目を入力してください。');
-        return;
-      }
-
-      // Submission animation on submit button
-      const submitBtn = entryForm.querySelector('.form-submit-btn');
-      const originalText = submitBtn.innerHTML;
-      
-      submitBtn.disabled = true;
-      submitBtn.style.opacity = '0.6';
-      submitBtn.innerHTML = '送信中...';
-
-      // Simulate network request (1.5s delay)
-      setTimeout(() => {
-        // Hide form and display success panel
-        entryForm.style.display = 'none';
-        formSuccess.style.display = 'block';
-        
-        // Hide the sticky bottom CTA bar since form is submitted
-        if (stickyCtaBar) {
-          stickyCtaBar.classList.remove('visible');
-          // Disable scroll listener
-          toggleStickyCta = () => {};
-        }
-
-        // Scroll to success panel smoothly
-        const headerOffset = 70;
-        const elementPosition = applySection.getBoundingClientRect().top;
-        const offsetPosition = elementPosition + window.scrollY - headerOffset;
-        
-        window.scrollTo({
-          top: offsetPosition,
-          behavior: 'smooth'
-        });
-      }, 1500);
-    });
-  }
-
+  // システム初期化
+  initLanguageSwitcher();
+  initStickyCta();
 });
+
+/**
+ * 1. 日韓言語切り替え機能の構築
+ */
+function initLanguageSwitcher() {
+  const htmlEl = document.documentElement;
+  const btnJa = document.getElementById('btn-ja');
+  const btnKo = document.getElementById('btn-ko');
+  const selectBox = document.querySelector('.form-grid select');
+
+  // セレクトボックス要素の動的多言語切り替えデータ
+  const selectOptions = {
+    ja: [
+      { value: "", text: "選択してください" },
+      { value: "beatmaker", text: "トラックメイカー / 作曲家" },
+      { value: "vocalist", text: "ボーカリスト / シンガー" },
+      { value: "lyricist", text: "作詞家" },
+      { value: "mv_creator", text: "映像クリエイター / デザイナー" },
+      { value: "engineer", text: "ミキシング / マスタリング" },
+      { value: "other", text: "その他（コラボレーション提案等）" }
+    ],
+    ko: [
+      { value: "", text: "선택해 주세요" },
+      { value: "beatmaker", text: "트랙메이커 / 작곡가" },
+      { value: "vocalist", text: "보컬리스트 / 싱어" },
+      { value: "lyricist", text: "작사가" },
+      { value: "mv_creator", text: "영상 크리에이터 / 디자이너" },
+      { value: "engineer", text: "믹싱 / 마스터링 엔지니어" },
+      { value: "other", text: "기타 (콜라보레이션 제안 등)" }
+    ]
+  };
+
+  const updateSelectOptions = (lang) => {
+    if (!selectBox) return;
+    selectBox.innerHTML = '';
+    selectOptions[lang].forEach(opt => {
+      const option = document.createElement('option');
+      option.value = opt.value;
+      option.textContent = opt.text;
+      selectBox.appendChild(option);
+    });
+  };
+
+  // グローバル関数として定義してHTMLボタンのonclickに対応
+  window.switchLang = function (lang) {
+    if (lang === 'ja') {
+      htmlEl.classList.remove('lang-ko');
+      htmlEl.classList.add('lang-ja');
+      btnJa.classList.add('active');
+      btnKo.classList.remove('active');
+      updateSelectOptions('ja');
+    } else if (lang === 'ko') {
+      htmlEl.classList.remove('lang-ja');
+      htmlEl.classList.add('lang-ko');
+      btnKo.classList.add('active');
+      btnJa.classList.remove('active');
+      updateSelectOptions('ko');
+    }
+  };
+
+  // 初回読み込み時の設定
+  const currentLang = htmlEl.classList.contains('lang-ko') ? 'ko' : 'ja';
+  updateSelectOptions(currentLang);
+}
+
+/**
+ * 2. SP版：スクロール連動型下部固定CTAバーの挙動制御
+ */
+function initStickyCta() {
+  const stickyBar = document.getElementById('stickyCtaBar');
+  if (!stickyBar) return;
+
+  window.addEventListener('scroll', () => {
+    // 画面横幅がスマホサイズ以下、かつ200px以上スクロールされた場合にフェード表示
+    if (window.innerWidth <= 768 && window.scrollY > 200) {
+      stickyBar.style.display = 'block';
+    } else {
+      stickyBar.style.display = 'none';
+    }
+  });
+}

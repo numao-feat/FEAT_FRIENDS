@@ -4,14 +4,14 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title id="siteTitle">FEAT FRIENDS | プロジェクト共創音楽レーベル</title>
+  <title id="siteTitle">FEAT FRIENDS | クリエイター共創型・次世代音楽レーベル</title>
 
   <meta name="description"
-    content="FEAT FRIENDS（フィート・フレンズ）は、プロジェクトベースでクリエイターと「今の時代に響く本当に良い音楽」を共創する次世代音楽レーベルです。インハウスのUGCプロモーション、DSP推薦、透明性の高いレベニューシェアで、楽曲の価値を最大化します。">
+    content="FEAT FRIENDS（フィート・フレンズ）は、10代〜20代向けSNSトレンドに特化した楽曲をクリエイターと共創するプロジェクト型音楽レーベルです。インハウスのUGCプロモーション、DSP推薦、透明性の高いレベニューシェアで、楽曲の価値を最大化します。">
   <meta name="keywords"
     content="FEAT FRIENDS, 音楽レーベル, 楽曲制作, コラボレーター募集, レベニューシェア, 作曲家, 歌手, MVクリエイター, 沼尾優大, Kijibato, KUROGO">
-  <meta property="og:title" content="FEAT FRIENDS | プロジェクト共創音楽レーベル">
-  <meta property="og:description" content="あなたの「作る力」と私たちの「届ける力」を一曲単位で掛け合わせる。プロジェクトでのコラボレーター募集中。">
+  <meta property="og:title" content="FEAT FRIENDS | クリエイター共創型・次世代音楽レーベル">
+  <meta property="og:description" content="あなたの「作る力」と私たちの「届ける力」を1曲単位で掛け合わせる。プロジェクトでのコラボレーター募集中。">
   <meta property="og:image" content="img/feat-logo-color.png">
   <meta property="og:type" content="website">
   <meta name="twitter:card" content="summary_large_image">
@@ -19,9 +19,7 @@
   <link rel="stylesheet" href="index.css">
 
   <style>
-    /* ==========================================================================
-       言語切り替え用カスタムスタイル（レイアウトを絶対に崩さないための制御）
-       ========================================================================== */
+    /* 言語切り替え用カスタムスタイル */
     .lang-switcher {
       display: flex;
       align-items: center;
@@ -37,7 +35,7 @@
       color: #666;
       background: none;
       border: none;
-      padding: 4px 6px;
+      padding: 4px 8px;
       font-family: inherit;
       font-weight: 900;
       transition: all 0.2s ease;
@@ -45,7 +43,7 @@
 
     .lang-btn.active {
       color: #000;
-      background: #e2ff00;
+      background: var(--pink-color, #ff66b2);
       border: 2px solid #000;
       box-shadow: 2px 2px 0px #000;
     }
@@ -55,20 +53,90 @@
       align-items: center;
     }
 
-    /* テキスト単体の表示・非表示切り替えロジック */
+    /* 表示・非表示切り替え */
     .lang-ja .text-ko,
     .lang-ko .text-ja {
       display: none !important;
     }
 
-    /* インライン要素がブロック化して崩れるのを防ぐため、表示側は特別に指定せず自然なレイアウトに任せます */
+    /* ==========================================================================
+       SP版ファーストビュー & 文字切れ・文字被り対策（追加・上書きCSS）
+       ========================================================================== */
+
+    /* ① ヒーローエリア（ファーストビュー）の文字切れ徹底対策 */
+    .hero-title {
+      word-break: break-word;
+      overflow-wrap: break-word;
+    }
+
+    .hero-title span {
+      display: inline-block;
+      /* 単語の途中で不自然に切れるのを防ぎつつ、適切に改行 */
+      max-width: 100%;
+    }
+
+    @media (max-width: 768px) {
+      .hero {
+        padding: 40px 0 60px 0;
+        /* スマホ画面に収まりやすいよう上下の余白を最適化 */
+      }
+
+      .hero-title {
+        font-size: 1.8rem;
+        /* 画面幅に合わせてフォントサイズをフルードに調整 */
+        line-height: 1.4;
+      }
+
+      .hero-title .copy-line-1,
+      .hero-title .copy-line-2 {
+        display: block;
+        margin-bottom: 8px;
+      }
+    }
+
+    /* ② プロセス（タイムライン）の文字被り・重なり徹底対策 */
+    .process-timeline-v2 {
+      position: relative;
+    }
+
+    .process-step-v2 {
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+      margin-bottom: 24px;
+      position: relative;
+    }
+
+    .step-badge {
+      flex-shrink: 0;
+      /* スマホ幅でもバッジの横幅が絶対に潰れないようにガード */
+      white-space: nowrap;
+    }
+
+    .step-card-v2 {
+      flex-grow: 1;
+      min-width: 0;
+      /* カード内のテキスト溢れを防ぐ */
+    }
+
+    @media (max-width: 480px) {
+      .process-step-v2 {
+        flex-direction: column;
+        /* 非常に狭い画面では縦並びに切り替えてレイアウト崩れを完全に防止 */
+        gap: 8px;
+      }
+
+      .step-badge {
+        margin-left: 0;
+      }
+    }
   </style>
 </head>
 
 <body>
 
   <div class="sticky-cta-bar" id="stickyCtaBar">
-    <a href="#apply" class="btn btn-lime" style="opacity: 0.7;">
+    <a href="#apply" class="btn btn-pink" style="opacity: 0.8;">
       <span class="text-ja">エントリー受付準備中</span>
       <span class="text-ko">지원서 접수 준비 중</span>
     </a>
@@ -89,7 +157,7 @@
         </div>
 
         <div class="header-cta">
-          <a href="#apply" class="btn" style="opacity: 0.7;">COMING SOON</a>
+          <a href="#apply" class="btn" style="opacity: 0.8;">COMING SOON</a>
         </div>
       </div>
     </div>
@@ -102,21 +170,27 @@
       </div>
 
       <h1 class="hero-title">
-        <span class="text-ja">届ける、届かす。<br>あなたのクリエイティブ。</span>
-        <span class="text-ko">세상에 전하고, 닿게 한다.<br>당신의 크리에이티브.</span>
-        <br>
-        <span class="text-outline-lime">FEAT FRIENDS</span>
+        <span class="copy-line-1">
+          <span class="text-ja">届ける、届かす。</span>
+          <span class="text-ko">전하고, 닿게 한다.</span>
+        </span>
+        <span class="copy-line-2">
+          <span class="text-ja">あなたのクリエイティブを、世界へ。</span>
+          <span class="text-ko">당신의 크리에이티브를 세상으로.</span>
+        </span>
+        <span class="text-outline-pink">FEAT FRIENDS</span>
       </h1>
 
       <p class="hero-desc">
-        <span
-          class="text-ja">私たちは、従来の専属契約や永続的な所属に縛るレーベルではありません。<strong>「この曲で一緒にヒットを作ろう」というプロジェクトベース</strong>で、あなたの優れた制作力と、私たちの企画・マーケティング力を掛け合わせ、今の時代に響く楽曲を共創・還元します。</span>
-        <span class="text-ko">우리는 기존의 전속 계약이나 영구적인 소속으로 크리에이터를 얽매는 레이블이 아닙니다. <strong>'이 곡으로 함께 히트를 만들어보자'라는 단발성 프로젝트
-            기반</strong>으로, 당신의 뛰어난 제작 능력과 우리의 기획·마케팅 능력을 결합하여 이 시대에 깊은 울림을 주는 음악을 함께 만들고 그 가치를 나누고자 합니다.</span>
+        <span class="text-ja">FEAT
+          FRIENDSは、従来の専属契約や永続的な所属でクリエイターを縛るレーベルではありません。大好きなシールを1枚ずつノートに集めていくように、<strong>「この楽曲で一緒にヒットを作ろう」という1曲単位のプロジェクトベース</strong>でチームを組み、あなたの優れた制作力と、私たちの企画・マーケティング力を掛け合わせて、10代〜20代のSNSトレンドに響く楽曲を共創・還元するアジャイルな音楽レーベルです。</span>
+        <span class="text-ko">우리는 기존의 전속 계약이나 영구적인 소속으로 크리에이터를 얽매는 레이블이 아닙니다. 마음에 드는 스티커를 한 장씩 스티커북에 모아가듯, <strong>'이
+            곡으로 함께 히트를 만들어보자'라는 단발성 프로젝트 기반</strong>으로, 당신의 뛰어난 제작 능력과 우리의 기획·마케팅 능력을 결합하여 이 시대의 SNS 트렌드를 사로잡을 음악을 함께
+          만들고 그 가치를 나누고자 합니다.</span>
       </p>
 
       <div class="hero-actions">
-        <a href="#apply" class="btn btn-lime btn-block" style="opacity: 0.7;">
+        <a href="#apply" class="btn btn-pink btn-block" style="opacity: 0.8;">
           <span class="text-ja">エントリー受付準備中</span>
           <span class="text-ko">지원서 접수 준비 중</span>
         </a>
@@ -132,25 +206,21 @@
       <span>CALLING MV CREATORS / VIDEO EDITORS</span>
       <span>PROJECT-BASED REVENUE SHARE</span>
       <span>FEAT FRIENDS × CREATORS</span>
-      <span>CALLING BEATMAKERS / PRODUCERS</span>
-      <span>CALLING SINGERS / VOCALISTS</span>
-      <span>CALLING MV CREATORS / VIDEO EDITORS</span>
-      <span>PROJECT-BASED REVENUE SHARE</span>
     </div>
   </div>
 
   <section class="about section" id="about">
     <div class="container">
       <span class="section-tag">
-        <span class="text-ja">[ FEAT FRIENDSとは ]</span>
+        <span class="text-ja">[ OUR MODEL ]</span>
         <span class="text-ko">[ FEAT FRIENDS 소개 ]</span>
       </span>
       <h2 class="section-title">
-        <span class="text-ja">クリエイターと対等に<br>ヒットを狙うアプローチ</span>
+        <span class="text-ja">クリエイターと対等なパートナーとして<br>確実にヒットを狙うアプローチ</span>
         <span class="text-ko">크리에이터와 대등한 관계로<br>히트를 노리는 접근 방식</span>
       </h2>
       <p class="section-subtitle">
-        <span class="text-ja">個人の自由な活動を制限することなく、一曲単位で協力体制を構築するアジャイルなレーベルモデルです。</span>
+        <span class="text-ja">個人の自由な活動を制限することなく、1曲単位で協力体制を構築するアジャイルなレーベルモデルです。</span>
         <span class="text-ko">개인의 자유로운 활동을 제한하지 않고, 단 한 곡 단위로 협력 체계를 구축하는 애자일(Agile) 레이블 모델입니다.</span>
       </p>
 
@@ -163,9 +233,9 @@
           </h3>
           <p class="concept-card-desc">
             <span
-              class="text-ja">クリエイター同士の「これ、バズりそう」という直感や遊び心をそのまま形にする自由度の高い制作スタイル。ヒット予測が困難な時代だからこそ、重苦しい審議プロセスを省き、仮説ベースでスピーディーに打席に立ち続けることで、時代のスタンダードを狙います。</span>
-            <span class="text-ko">크리에이터 간의 '이거 대박 나겠는데?'라는 직감과 즐거운 장난기를 그대로 형태화하는 자유도 높은 제작 스타일을 지향합니다. 히트를 예측하기 어려운 시대인
-              만큼, 무겁고 복잡한 심의 과정을 과감히 생략하고 가설을 바탕으로 빠르게 시장의 문을 두드려 시대의 새로운 스탠다드를 노립니다.</span>
+              class="text-ja">クリエイター同士の「これ、バズりそう！」という直感や遊び心を、お気に入りのシールをパッとノートに貼るようなスピード感で形にする自由度の高いスタイルです。ヒット予測が困難な時代だからこそ、重苦しい審議プロセスを省き、仮説ベースでスピーディーに打席に立ち続けることで、次世代のスタンダードを狙います。</span>
+            <span class="text-ko">크리에이터 간의 '이거 대박 나겠는데?'라는 직감과 즐거운 장난기를 스티커를 붙이듯 빠른 속도감으로 형태화하는 자유도 높은 제작 스타일을 지향합니다.
+              히트를 예측하기 어려운 시대인 만큼, 복잡한 심의 과정을 과감히 생략하고 가설을 바탕으로 빠르게 시장의 문을 두드려 새로운 스탠다드를 노립니다.</span>
           </p>
         </div>
 
@@ -177,9 +247,9 @@
           </h3>
           <p class="concept-card-desc">
             <span
-              class="text-ja">「誰が作ったか」ではなく「何を作ったか」で評価されるフェアな環境の確立。楽曲そのもののクオリティにスポットライトを当てることで、共創した作品が世界中で独立したIP（知的財産）として機能し、流通していく仕組みを構築します。</span>
-            <span class="text-ko">'누가 만들었는가'가 아닌 '무엇을 만들었는가'로 평가받는 공정한 환경을 확립합니다. 음악 그 자체의 퀄리티에 스포트라이트를 비춤으로써, 함께 만든 작품이
-              전 세계에서 독립된 IP(지식재산권)로서 기능하고 유통될 수 있는 구조를 구축합니다.</span>
+              class="text-ja">「誰が作ったか」ではなく「何を作ったか」で評価されるフェアな環境を確立します。シール帳を開いたときにどのシールもキラキラと個性を放つように、楽曲そのもののクオリティにスポットライト（FEAT）を当てることで、共創した作品が世界中で独立したIP（知的財産）として機能し、流通していく仕組みを構築します。</span>
+            <span class="text-ko">'누가 만들었는가'가 아닌 '무엇을 만들었는가'로 평가받는 공정한 환경을 확립합니다. 스티커북의 스티커들이 각자 반짝이듯, 음악 그 자체의 퀄리티에
+              스포트라이트(FEAT)를 비춤으로써 함께 만든 작품이 전 세계에서 독립된 IP로서 기능하고 유통될 수 있는 구조를 구축합니다.</span>
           </p>
         </div>
 
@@ -191,7 +261,7 @@
           </h3>
           <p class="concept-card-desc">
             <span
-              class="text-ja">単発のコラボレーションだからこそ、そこから生まれるヒットを確固たるストーリー（実績）とし、クリエイターがその後の個人キャリアで大きな案件を獲得するための「名刺代わりの実績」として活用していただきます。</span>
+              class="text-ja">単発のコラボレーションだからこそ、そこから生まれるヒットを確固たるストーリー（実績）とし、参加クリエイターがその後の個人キャリアでさらに大きな案件を獲得するための「名刺代わりの実績（特別なコレクションシール）」として活用していただくことを目指しています。</span>
             <span class="text-ko">단발성 콜라보레이션이기에, 그 프로젝트를 통해 탄생한 히트를 확고한 성공 스토리(실적)로 삼을 수 있습니다. 크리에이터가 향후 개인 커리어에서 더 큰
               프로젝트를 수주할 수 있도록 '명함이 되어줄 확실한 포트폴리오'로 활용하시기 바랍니다.</span>
           </p>
@@ -208,7 +278,7 @@
         <span class="text-ko">콜라보레이션 진행 프로세스</span>
       </h2>
       <p class="section-subtitle">
-        <span class="text-ja">プロジェクトごとに、楽曲の制作から収益還元までをスムーズに進行します。</span>
+        <span class="text-ja">プロジェクトごとに、楽曲の企画・制作から収益還元までをスムーズに進行します。</span>
         <span class="text-ko">프로젝트별로 음원 제작부터 수익 정산까지 유연하고 신속하게 진행됩니다.</span>
       </p>
 
@@ -222,7 +292,7 @@
             </h3>
             <p class="flow-card-desc">
               <span
-                class="text-ja">クリエイターの個性を活かしつつ、TikTokやInstagram、YouTubeショートなどのSNSプラットフォームで人々の心に一瞬で届く、中毒性のあるフック（ショート音源）を高いクオリティで企画・制作します。</span>
+                class="text-ja">クリエイターの個性を活かしつつ、TikTokやInstagram、YouTubeショートなどのSNSプラットフォームで人々の心に一瞬で届く、中毒性の高いフック（ショート音源）を高いクオリティで企画・制作します。</span>
               <span class="text-ko">크리에이터의 개성을 살리면서도 TikTok, Instagram, YouTube 쇼츠 등 SNS 플랫폼에서 유저들의 마음을 순식간에 사로잡을 중독성 있는
                 훅(숏폼 음원)을 높은 퀄리티로 기획·제작합니다.</span>
             </p>
@@ -238,7 +308,7 @@
             </h3>
             <p class="flow-card-desc">
               <span
-                class="text-ja">一般ユーザーやインフルエンサーが、その楽曲を「自分の動画の背景（UGC）」として使いたくなるような、作品の世界観に合わせたプロモーションやトレンドの創出を行います。</span>
+                class="text-ja">一般ユーザーやインフルエンサーが、その楽曲を「自分の動画（日常）をデコるシール」のように使いたくなる、UGC（ユーザー生成コンテンツ）を徹底的に意識したプロモーションとトレンドの創出を行います。</span>
               <span class="text-ko">일반 유저나 인플루언서들이 해당 음원을 '자신의 영상 배경(UGC)'으로 사용하고 싶어 하도록, 작품의 세계관에 맞춘 프로모션과 트렌드를 설계하고
                 만들어냅니다.</span>
             </p>
@@ -253,7 +323,7 @@
               <span class="text-ko">압도적인 인지도 및 재생 수 확보</span>
             </h3>
             <p class="flow-card-desc">
-              <span class="text-ja">多くの動画に楽曲が起用されることで、作品への接触機会が劇的に増加。SNS上での楽曲使用数、および再生数を最大化させていきます。</span>
+              <span class="text-ja">多くのSNS動画に楽曲が起用（貼付）されることで、作品への接触機会が劇的に増加。SNS上での楽曲使用数、および再生数を最大化させていきます。</span>
               <span class="text-ko">수많은 영상에 음원이 활발히 차용되면서 작품의 노출 기회가 폭발적으로 증가합니다. SNS상에서의 음원 사용량 및 총 재생 수를
                 극대화합니다.</span>
             </p>
@@ -269,9 +339,9 @@
             </h3>
             <p class="flow-card-desc">
               <span class="text-ja">SNSで楽曲に魅了されたリスナーをSpotifyやApple
-                Musicなどの配信サービスへ誘導。フル尺（ストリーミング音源）の再生数を伸ばすことで、一時的な流行で終わらない、継続的なデジタル著作권印税・配信収益を確立します。</span>
-              <span class="text-ko">SNS에서 음원에 매료된 리스너들을 Spotify, Apple Music, 멜론 등의 주요 스트리밍 서비스로 유도합니다. 완곡(풀 버전 음원)의 재생
-                수를 늘림으로써 일시적인 유행에 그치지 않는 지속적인 디지털 저작권 인세 및 스트리밍 수익을 확립합니다.</span>
+                Musicなどの主要配信サービスへ誘導。フル尺（ストリーミング音源）の再生数を伸ばすことで、一時的な流行で終わらない、継続的なデジタル著作権印税・配信収益を確立します。</span>
+              <span class="text-ko">SNS에서 음원에 매료된 리스너들을 Spotify, Apple Music 등의 주요 스트리밍 서비스로 유도합니다. 완곡(풀 버전 음원)의 재생 수를
+                늘림으로써 일시적인 유행에 그치지 않는 지속적인 디지털 저작권 인세 및 스트리밍 수익을 확립합니다.</span>
             </p>
           </div>
         </div>
@@ -284,7 +354,7 @@
               <span class="text-ko">투명성 높은 레비뉴 셰어 (수익 분배)</span>
             </h3>
             <p class="flow-card-desc">
-              <span class="text-ja">生み出された総収益は、あらかじめ設定した公正な比率に基づき、お互いの貢献を称え合う形でクリエイターとレーベル間でしっかりと分配します。</span>
+              <span class="text-ja">共同制作によって生み出された総収益は、あらかじめ設定した公正な比率に基づき、お互いの貢献を称え合う形でクリエイターとレーベル間でしっかりと分配します。</span>
               <span class="text-ko">창출된 총수익은 사전에 설정한 공정한 비율에 따라, 서로의 기여를 인정하고 존중하는 방식으로 크리에이터와 레이블 간에 투명하게 분배됩니다.</span>
             </p>
           </div>
@@ -312,7 +382,7 @@
             <span class="text-ko">■ 플랫폼에 최적화된 음원 설계</span>
           </h3>
           <p class="support-item-desc">
-            <span class="text-ja">「SNSという現代のステージ」で最も輝く構成を最初から計算して形にするため、確度の高いアプローチが可能です。</span>
+            <span class="text-ja">「SNSという現代のステージ」で最も映え、最も使用される構成を最初から計算して形にするため、確度の高いアプローチが可能です。</span>
             <span class="text-ko">'SNS라는 현대의 무대'에서 가장 빛날 수 있는 곡 구성을 초기 단계부터 계산하여 형태화하므로, 성공 확률이 높은 접근이 가능합니다.</span>
           </p>
         </div>
@@ -324,9 +394,9 @@
           </h3>
           <p class="support-item-desc">
             <span
-              class="text-ja">広告で無理やり見せるのではなく、ユーザーが「この音楽と一緒に自分を表現したい」と主体的に拡散してくれる仕掛けを自社の専門クリエイティブチームが内製でスピード制作。本質的なファンを増やします。</span>
+              class="text-ja">広告で無理やり見せるのではなく、ユーザーが「この音楽と一緒に自分を表現したい」と主体的に拡散（動画投稿）してくれる仕掛けを自社の専門クリエイティブチームが内製でスピード制作。本質的なトレンドを作ります。</span>
             <span class="text-ko">광고를 통해 억지로 보여주는 것이 아니라, 유저가 '이 음악과 함께 자신을 표현하고 싶다'며 주도적으로 확산할 수 있는 장치를 자사의 전문 크리에이티브
-              팀이 내부에서 신속하게 제작합니다. 이를 통해 본질적인 팬덤을 확장합니다.</span>
+              팀이 내부에서 신속하게 제작합니다.</span>
           </p>
         </div>
 
@@ -337,9 +407,9 @@
           </h3>
           <p class="support-item-desc">
             <span class="text-ja">主要配信サービス（Spotify/Apple
-              Music等）の公式プレイリストへの直接ピッチング（推薦）を行いリリース初期から露出を獲得。さらにグッズ化、株主ネットワークを通じたメディア・イベント展開までトータルで引き上げます。</span>
+              Music等）の公式プレイリストへの直接ピッチング（推薦）を行い、リリース初期から露出を獲得。さらにグッズ化、メディア・イベント展開までトータルでプロデュースします。</span>
             <span class="text-ko">주요 음원 서비스(Spotify, Apple Music 등)의 공식 플레이리스트에 직접 피칭(추천)을 진행하여 발매 초기부터 노출을 확보합니다. 나아가
-              굿즈 제작, 주주 네트워크를 통한 미디어·이벤트 연계까지 종합적으로 전개합니다.</span>
+              굿즈 제작, 미디어·이벤트 연계까지 종합적으로 전개합니다.</span>
           </p>
         </div>
       </div>
@@ -350,15 +420,15 @@
     <div class="container">
       <span class="section-tag">[ REVENUE SHARE ]</span>
       <h2 class="section-title">
-        <span class="text-ja">完全収益分配制<br><span class="text-outline">「FEAT FRIENDSモデル」</span></span>
-        <span class="text-ko">완전 수익 분배제<br><span class="text-outline">「FEAT FRIENDS 모델」</span></span>
+        <span class="text-ja">完全収益分配制<br><span class="text-outline-pink-sm">「FEAT FRIENDSモデル」</span></span>
+        <span class="text-ko">완전 수익 분배제<br><span class="text-outline-pink-sm">「FEAT FRIENDS 모델」</span></span>
       </h2>
       <p class="section-subtitle">
-        <span class="text-ja">一回限りのプロジェクトだからこそ、対等でクリアな分配を保証します。</span>
+        <span class="text-ja">プロジェクトベースの協業だからこそ、対等でクリアな分配を保証します。</span>
         <span class="text-ko">프로젝트 기반의 협업인 만큼, 대등하고 투명한 분배를 보장합니다.</span>
       </p>
 
-      <div class="brutal-card-lime">
+      <div class="brutal-card-pink">
         <h3 style="font-size: 1.25rem; font-weight: 900; margin-bottom: 20px; text-align: center; color: #000;">
           <span class="text-ja">「クリエイティブ出資型」製作委員会</span>
           <span class="text-ko">「크리에이티브 출자형」 제작위원회</span>
@@ -366,7 +436,7 @@
 
         <div class="model-flow">
           <div class="model-node">
-            <span class="text-ja">1. 参加クリエイター</span>
+            <span class="text-ja">1. 参加クリエイター（FRIENDS）</span>
             <span class="text-ko">1. 참여 크리에이터</span>
             <div class="model-node-list">
               <span class="text-ja">[作曲家]</span><span class="text-ko">[작곡가]</span>
@@ -394,8 +464,8 @@
             <span class="text-ko">3. 주요 스트리밍 및 미디어 시장</span>
             <div class="model-node-list">
               <span class="text-ja">[DSP配信]</span><span class="text-ko">[DSP 유통]</span>
-              <span class="text-ja">[IP化]</span><span class="text-ko">[IP 사업화]</span>
-              <span class="text-ja">[他メディア連動]</span><span class="text-ko">[타 미디어 연동]</span>
+              <span class="text-ja">[IP化・グッズ展開]</span><span class="text-ko">[IP 사업화]</span>
+              <span class="text-ja">[UGC拡散]</span><span class="text-ko">[타 미디어 연동]</span>
             </div>
           </div>
         </div>
@@ -423,72 +493,93 @@
         <span class="text-ko">팀 빌딩 시 수익 분배 규칙과 희망 조건을 명확히 하고, 계약을 체결한 후 본격적인 제작을 진행합니다.</span>
       </p>
 
-      <div class="process-list">
-        <div class="process-item">
-          <h3 class="process-item-title">
-            <span class="text-ja">コンセプト策定 <span>プロデューサー</span></span>
-            <span class="text-ko">컨셉 수립 <span>프로듀서</span></span>
-          </h3>
-          <p class="process-item-desc">
-            <span class="text-ja">SNSでのバイラル構造から逆算した楽曲テーマとコンセプトを設計します。</span>
-            <span class="text-ko">SNS상의 바이럴 구조를 역산하여 음원 테마와 메인 컨셉을 설계합니다.</span>
-          </p>
+      <div class="process-timeline-v2">
+
+        <div class="process-step-v2">
+          <div class="step-badge">STEP 01</div>
+          <div class="step-card-v2">
+            <h3 class="step-title-v2">
+              <span class="text-ja">コンセプト策定 <span class="role-tag">プロデューサー</span></span>
+              <span class="text-ko">컨셉 수립 <span class="role-tag">프로듀서</span></span>
+            </h3>
+            <p class="step-desc-v2">
+              <span class="text-ja">SNSでのバイラル構造から逆算した楽曲テーマとコンセプトを設計します。</span>
+              <span class="text-ko">SNS상의 바이랄 구조를 역산하여 음원 테마와 메인 컨셉을 설계합니다.</span>
+            </p>
+          </div>
         </div>
 
-        <div class="process-item">
-          <h3 class="process-item-title">
-            <span class="text-ja">チームアサイン <span>共創体制</span></span>
-            <span class="text-ko">팀 어사인 <span>공동 창작 체계</span></span>
-          </h3>
-          <p class="process-item-desc">
-            <span class="text-ja">コンセプトに合致する作曲家、シンガー、MV制作者、エンジニアをプロジェクトごとにマッチングします。</span>
-            <span class="text-ko">기획 컨셉에 부합하는 작곡가, 싱어, MV 제작자, 엔지니어를 단발성 프로젝트별로 매칭합니다.</span>
-          </p>
+        <div class="process-step-v2">
+          <div class="step-badge">STEP 02</div>
+          <div class="step-card-v2">
+            <h3 class="step-title-v2">
+              <span class="text-ja">チームアサイン <span class="role-tag">共創体制</span></span>
+              <span class="text-ko">팀 어사인 <span class="role-tag">공동 창작 체계</span></span>
+            </h3>
+            <p class="step-desc-v2">
+              <span class="text-ja">コンセプトに合致する作曲家、シンガー、MV制作者、エンジニアをプロジェクトごとにマッチングします。</span>
+              <span class="text-ko">기획 컨셉에 부합하는 작곡가, 싱어, MV 제작자, 엔지니어를 단발성 프로젝트별로 매칭합니다.</span>
+            </p>
+          </div>
         </div>
 
-        <div class="process-item">
-          <h3 class="process-item-title">
-            <span class="text-ja">音源・動画制作 <span>クリエイター</span></span>
-            <span class="text-ko">음원 및 영상 제작 <span>크리에이터</span></span>
-          </h3>
-          <p class="process-item-desc">
-            <span class="text-ja">プラットフォーム上で最も映えるフック音源と、UGCを誘発する動画コンテンツを並行して作り上げます。</span>
-            <span class="text-ko">플랫폼에서 가장 시선을 사로잡을 수 있는 훅 음원과 UGC를 유도하는 영상 콘텐츠를 동시에 빌드업합니다.</span>
-          </p>
+        <div class="process-step-v2">
+          <div class="step-badge">STEP 03</div>
+          <div class="step-card-v2">
+            <h3 class="step-title-v2">
+              <span class="text-ja">音源・動画制作 <span class="role-tag">クリエイター</span></span>
+              <span class="text-ko">음원 및 영상 제작 <span class="role-tag">크리에이터</span></span>
+            </h3>
+            <p class="step-desc-v2">
+              <span class="text-ja">プラットフォーム上で最も映えるフック音源と、ユーザーの動画投稿（UGC）を誘発するクリエイティブを並行して作り上げます。</span>
+              <span class="text-ko">플랫폼에서 가장 시선을 사로잡을 수 있는 훅 음원과 UGC를 유도하는 영상 콘텐츠를 동시에 빌드업합니다.</span>
+            </p>
+          </div>
         </div>
 
-        <div class="process-item">
-          <h3 class="process-item-title">
-            <span class="text-ja">楽曲チェック <span>フィードバック</span></span>
-            <span class="text-ko">음원 및 결과물 체크 <span>피드백</span></span>
-          </h3>
-          <p class="process-item-desc">
-            <span class="text-ja">お互いの専門性を活かして音源の細かいニュアンスや展開を徹底的に調整・最適化します。</span>
-            <span class="text-ko">서로의 전문성을 발휘하여 음원의 미세한 뉘앙스나 전개 구성을 철저하게 조정하고 최적화합니다.</span>
-          </p>
+        <div class="process-step-v2">
+          <div class="step-badge">STEP 04</div>
+          <div class="step-card-v2">
+            <h3 class="step-title-v2">
+              <span class="text-ja">楽曲チェック <span class="role-tag">フィードバック</span></span>
+              <span class="text-ko">음원 및 결과물 체크 <span class="role-tag">피드백</span></span>
+            </h3>
+            <p class="step-desc-v2">
+              <span class="text-ja">お互いの専門性を活かして音源の細かいニュアンスや展開を徹底的に調整・最適化します。</span>
+              <span class="text-ko">서로의 전문성을 발휘하여 음원의 미세한 뉘앙스나 전개 구성을 철저하게 조정하고 최적화합니다.</span>
+            </p>
+          </div>
         </div>
 
-        <div class="process-item">
-          <h3 class="process-item-title">
-            <span class="text-ja">SNS拡散・プロモーション <span>FEAT FRIENDS</span></span>
-            <span class="text-ko">SNS 확산 및 프로モーション <span>FEAT FRIENDS</span></span>
-          </h3>
-          <p class="process-item-desc">
-            <span class="text-ja">自社のSNS運用部隊が、独自のプロモーション手法でTikTokやInstagram等の主要メディアで一気に拡散を仕掛けます。</span>
-            <span class="text-ko">자사의 SNS 전담 운영 부서가 고유의 프로모션 방법론을 통해 TikTok, Instagram 등 주요 미디어에서 강력하게 확산을 주도합니다.</span>
-          </p>
+        <div class="process-step-v2">
+          <div class="step-badge">STEP 05</div>
+          <div class="step-card-v2">
+            <h3 class="step-title-v2">
+              <span class="text-ja">SNS拡散・プロモーション <span class="role-tag">FEAT FRIENDS</span></span>
+              <span class="text-ko">SNS 확산 및 프로モーション <span class="role-tag">FEAT FRIENDS</span></span>
+            </h3>
+            <p class="step-desc-v2">
+              <span class="text-ja">自社のSNS運用部隊が、独自のプロモーション手法でTikTokやInstagram等の主要メディアで一気に拡散を仕掛けます。</span>
+              <span class="text-ko">자사의 SNS 전담 운영 부서가 고유의 프로모션 방법론을 통해 TikTok, Instagram 등 주요 미디어에서 강력하게 확산을
+                주도합니다.</span>
+            </p>
+          </div>
         </div>
 
-        <div class="process-item">
-          <h3 class="process-item-title">
-            <span class="text-ja">収益分配 <span>レベニューシェア</span></span>
-            <span class="text-ko">수익 정산 및 분배 <span>레비뉴 셰어</span></span>
-          </h3>
-          <p class="process-item-desc">
-            <span class="text-ja">再生実績等に基づき、あらかじめ約束した比率で収益を透明性高く分配します。</span>
-            <span class="text-ko">스트리밍 재생 실적 등을 기반으로 사전에 약정한 비율에 따라 수익을 투명하게 정산하여 분배합니다.</span>
-          </p>
+        <div class="process-step-v2">
+          <div class="step-badge">STEP 06</div>
+          <div class="step-card-v2">
+            <h3 class="step-title-v2">
+              <span class="text-ja">収益分配 <span class="role-tag">レベニューシェア</span></span>
+              <span class="text-ko">수익 정산 및 분배 <span class="role-tag">레비뉴 셰어</span></span>
+            </h3>
+            <p class="step-desc-v2">
+              <span class="text-ja">再生実績等に基づき、あらかじめ約束した比率で収益を透明性高く分配します。</span>
+              <span class="text-ko">스트리밍 재생 실적 등을 기반으로 사전에 약정한 비율에 따라 수익을 투명하게 정산하여 분배합니다.</span>
+            </p>
+          </div>
         </div>
+
       </div>
     </div>
   </section>
@@ -565,27 +656,29 @@
             </div>
             <div class="producer-meta">
               <span class="producer-title">
-                <span class="text-ja">取締役 / FEAT FRIENDS レーベル事業部 サウンドプロデューサー (KUROGO株式会社)</span>
-                <span class="text-ko">이사 / FEAT FRIENDS 레이블 사업부 사운드 프로듀서 (KUROGO 주식회사)</span>
+                <span class="text-ja">KUROGO株式会社 取締役 / サウンドプロデューサー</span>
+                <span class="text-ko">KUROGO 주식회사 이사 / 사운드 프로듀서</span>
               </span>
               <h3 class="producer-name-ja">Kijibato</h3>
               <div class="producer-name-en">Kijibato</div>
             </div>
           </div>
           <p class="producer-bio">
-            <span
-              class="text-ja">ボカロP、作詞・作曲・編曲家として多方面でヒット作を手掛けるサウンドプロデューサー。KUROGO株式会社の取締役を務め、音楽的なトレンドの分析やクリエイター目線に立った制作ディレクションに強みを持つ。『プロジェクトセカイ
-              カラフルステージ！ feat.
-              初音ミク』をはじめとする人気IPや、数々のVTuber、アーティストへの楽曲提供実績を誇り、ポップかつフックのあるキャッチーなメロディメイクでZ世代を中心に熱い支持を集めています。</span>
-            <span class="text-ko">보컬로이드 프로듀서(보카로P), 작사·작곡·편곡가로서 다방면에서 히트작을 선보이고 있는 사운드 프로듀서. KUROGO 주식회사의 이사를 맡고 있으며, 음악
-              트렌드 분석 및 크리에이터의 관점을 반영한 제작 디렉션에 강점을 가지고 있습니다. '프로젝트 세카이 컬러풀 스테이지! feat. 하츠네 미쿠'를 비롯한 유명 IP 및 다수의
-              버튜버(VTuber), 아티스트에게 곡을 제공한 실적을 자랑하며, 팝하면서도 귀에 감기는 캐치한 멜로디 메이킹으로 Z세대를 중심으로 뜨거운 지지를 얻고 있습니다.</span>
+            <span class="text-ja">
+              KUROGO株式会社取締役。作曲家事務所「ドリームモンスター」所属の作詞家、作編曲家。展開の多い楽曲やクラブミュージックの要素を取り入れたポップスを得意とする。アーティストとしてはStardropRecordsの共同主催を務め、星宮とととの「ロービットファンタジー」、をとはとの「へるぷ！」など自主制作作品も多数手がける。また作家としては、TVアニメ【推しの子】「ピーマン体操」をはじめ、学園アイドルマスター、ラブライブ！蓮ノ空女学院スクールアイドルクラブ、＝LOVE、≠MEなど、数々の人気IPやアーティストへの楽曲提供を行っている。
+            </span>
+            <span class="text-ko">
+              KUROGO 주식회사의 이사이자 작곡가 기획사 '드림 몬스터(Dream Monster)' 소속의 작사·작사·편곡가. 다채로운 전개와 클럽 뮤직 요소를 접목한 팝 장르에 강점을 지니고
+              있습니다. 아티스트로서는 'StardropRecords'를 공동 주최하며 호시미야 토토와의 '로파이 판타지(Low-Bit Fantasy)', 오토하와의 '헬프!(Help!)' 등 수많은
+              자작품을 발표했습니다. 또한 대표작으로 TV 애니메이션 【최애의 아이】의 '피망 체조'를 비롯하여 학원 아이돌마스터, 러브라이브! 하스노소라 여학원 스쿨 아이돌 클럽, ＝LOVE, ≠ME 등
+              유명 IP 및 정상급 아티스트들에게 곡을 제공하며 활발히 활동 중입니다.
+            </span>
           </p>
 
           <div class="producer-bullets">
             <div>
               <h4 class="producer-bullet-title">
-                <span class="text-ja">UGC·SNSに最適化されたメロディメイク</span>
+                <span class="text-ja">UGC・SNSに最適化されたメロディメイク</span>
                 <span class="text-ko">UGC·SNS에 최적화된 멜로디 메이킹</span>
               </h4>
               <p class="producer-bullet-desc">
@@ -598,7 +691,7 @@
             <div>
               <h4 class="producer-bullet-title">
                 <span class="text-ja">クリエイターファーストの伴走型アプローチ</span>
-                <span class="text-ko">크리에이터 퍼스트 기반의 동반 성장형 어프로치</span>
+                <span class="text-ko">크리에이터 퍼스트 기반의 동반 성장형 어プローチ</span>
               </h4>
               <p class="producer-bullet-desc">
                 <span
@@ -626,10 +719,10 @@
       </p>
 
       <div class="brutal-card" style="position: relative;">
-        <div class="text-ja"
-          style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(255,255,255,0.9); z-index: 10; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 20px; border: 4px solid #000;">
+        <div class="text-ja modal-cover"
+          style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(255,255,255,0.92); z-index: 10; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 20px; border: 4px solid #000;">
           <div
-            style="background: #e2ff00; color: #000; font-size: 1.5rem; font-weight: 900; padding: 10px 30px; border: 3px solid #000; margin-bottom: 15px; transform: rotate(-2deg); box-shadow: 3px 3px 0 #000;">
+            style="background: var(--pink-color, #ff66b2); color: #000; font-size: 1.5rem; font-weight: 900; padding: 10px 30px; border: 3px solid #000; margin-bottom: 15px; transform: rotate(-2deg); box-shadow: 3px 3px 0 #000;">
             COMING SOON / 準備中
           </div>
           <p style="font-weight: 900; color: #000; font-size: 1.1rem; line-height: 1.6; max-width: 500px;">
@@ -638,10 +731,10 @@
           </p>
         </div>
 
-        <div class="text-ko"
-          style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(255,255,255,0.9); z-index: 10; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 20px; border: 4px solid #000;">
+        <div class="text-ko modal-cover"
+          style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(255,255,255,0.92); z-index: 10; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 20px; border: 4px solid #000;">
           <div
-            style="background: #e2ff00; color: #000; font-size: 1.5rem; font-weight: 900; padding: 10px 30px; border: 3px solid #000; margin-bottom: 15px; transform: rotate(-2deg); box-shadow: 3px 3px 0 #000;">
+            style="background: var(--pink-color, #ff66b2); color: #000; font-size: 1.5rem; font-weight: 900; padding: 10px 30px; border: 3px solid #000; margin-bottom: 15px; transform: rotate(-2deg); box-shadow: 3px 3px 0 #000;">
             COMING SOON / 준비 중
           </div>
           <p style="font-weight: 900; color: #000; font-size: 1.1rem; line-height: 1.6; max-width: 500px;">
@@ -695,7 +788,7 @@
             <textarea class="form-input" disabled></textarea>
           </div>
 
-          <button type="button" class="btn btn-lime form-submit-btn"
+          <button type="button" class="btn btn-pink form-submit-btn"
             style="background: #ccc; border-color: #999; color: #666;" disabled>
             <span class="text-ja">現在準備中です</span>
             <span class="text-ko">현재 준비 중입니다</span>
@@ -739,44 +832,9 @@
         </div>
       </div>
     </div>
-    </section>
+  </footer>
 
-    <script src="index.js"></script>
-
-    <script>
-      const titles = {
-        ja: "FEAT FRIENDS | プロジェクト共創音楽レーベル",
-        ko: "FEAT FRIENDS | 프로젝트 공동 창작 음악 레이블"
-      };
-
-      function switchLang(lang) {
-        // 1. HTMLタグのクラスを切り替えてCSSの表示/非表示を発火
-        const html = document.documentElement;
-        if (lang === 'ja') {
-          html.className = 'lang-ja';
-          html.setAttribute('lang', 'ja');
-          document.title = titles.ja;
-          document.getElementById('btn-ja').classList.add('active');
-          document.getElementById('btn-ko').classList.remove('active');
-        } else {
-          html.className = 'lang-ko';
-          html.setAttribute('lang', 'ko');
-          document.title = titles.ko;
-          document.getElementById('btn-ja').classList.remove('active');
-          document.getElementById('btn-ko').classList.add('active');
-        }
-      }
-
-      // 初回読み込み時のブラウザ言語自動判別設定
-      window.addEventListener('DOMContentLoaded', () => {
-        const userLang = navigator.language || navigator.userLanguage;
-        if (userLang.includes('ko')) {
-          switchLang('ko');
-        } else {
-          switchLang('ja'); // デフォルトは日本語
-        }
-      });
-    </script>
+  <script src="index.js"></script>
 </body>
 
 </html>
